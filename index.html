@@ -1,0 +1,3434 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <!-- =========================================================
+         [수정할 곳]
+         브라우저 탭에 표시되는 사이트 이름
+    ========================================================== -->
+
+    <title>신입 게임 기획자 엄기황 포트폴리오</title>
+
+
+    <style>
+
+        /* =========================================================
+           1. 기본 설정
+        ========================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                "Pretendard",
+                "Noto Sans KR",
+                Arial,
+                sans-serif;
+
+            /* =====================================================
+               [수정할 곳]
+               사이트 양옆 배경 색상
+            ====================================================== */
+
+            background: linear-gradient(
+            135deg,
+             #eef2f6 0%,
+             #dfe6ed 50%,
+             #f2f4f6 100%
+            );
+
+            color: #111;
+        }
+
+        img {
+            display: block;
+        }
+
+
+        /* =========================================================
+           2. 중앙 흰색 페이지
+
+           최대 폭 : 1450px
+
+           이전보다 넓게 설정해서
+           전체적으로 약 115% 확대된 느낌
+        ========================================================== */
+
+        .page {
+
+            width:
+                min(
+                    1450px,
+                    calc(100% - 100px)
+                );
+
+            min-height: 100vh;
+
+            margin: 0 auto;
+
+            padding:
+                65px
+                70px
+                90px;
+
+            background: white;
+
+            border-left: 4px solid #111;
+            border-right: 4px solid #111;
+        }
+
+
+        /* =========================================================
+           3. 사이트 상단
+        ========================================================== */
+
+        .header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            margin-bottom: 50px;
+        }
+
+
+        .header h1 {
+
+            margin:
+                0
+                0
+                10px;
+
+            font-size: 46px;
+
+            line-height: 1.2;
+        }
+
+
+        /* =========================================================
+           [수정할 곳]
+           자기소개 글자 설정
+
+           line-height
+           = 줄 간격
+        ========================================================== */
+
+        .intro {
+
+            margin: 0;
+
+            font-size: 19px;
+
+            line-height: 1.65;
+
+            font-weight: 600;
+        }
+
+
+        .header-right {
+
+            margin-top: 20px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================================================
+           4. 메인 레이아웃
+
+           왼쪽 : 프로필
+           오른쪽 : 프로젝트
+        ========================================================== */
+
+        .main-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                280px
+                minmax(0, 1fr);
+
+            gap: 70px;
+        }
+
+
+        /* =========================================================
+           5. 프로필 영역
+
+           프로필 사진은 프로젝트 이미지와
+           별개로 처리
+        ========================================================== */
+
+        .profile-image {
+
+            width: 100%;
+
+            height: 350px;
+
+            object-fit: cover;
+
+            background: #ddd;
+
+            border: 1px solid #ccc;
+        }
+
+        /* 이름만 크게 */
+        .profile-name {
+            font-size: 40px;
+            font-weight: 700;
+        }
+
+        .profile-info {
+
+            margin-top: 20px;
+
+            font-size: 22px;
+
+            line-height: 1.75;
+
+            font-weight: 450;
+        }
+
+
+        .profile-info p {
+            margin: 0;
+        }
+
+
+        /* =========================================================
+           6. 오른쪽 콘텐츠
+        ========================================================== */
+
+        .content {
+            min-width: 0;
+        }
+
+
+        .section {
+            margin-bottom: 55px;
+        }
+
+
+        .section-title {
+
+            margin:
+                0
+                0
+                18px;
+
+            font-size: 27px;
+        }
+
+
+        /* =========================================================
+           7. 팀 프로젝트 영역
+
+           가로 스크롤 가능
+
+           마우스로 잡고 좌우 드래그 가능
+        ========================================================== */
+
+        .team-project-list {
+
+            display: flex;
+
+            gap: 32px;
+
+            overflow-x: auto;
+
+            overflow-y: hidden;
+
+            padding:
+                8px
+                2px
+                20px;
+
+            cursor: grab;
+
+            user-select: none;
+
+            scroll-behavior: smooth;
+        }
+
+
+        .team-project-list.dragging {
+
+            cursor: grabbing;
+
+            scroll-behavior: auto;
+        }
+
+
+        .team-project-list img {
+
+            user-select: none;
+
+            -webkit-user-drag: none;
+        }
+
+
+        /* =========================================================
+           팀 프로젝트 스크롤바
+        ========================================================== */
+
+        .team-project-list::-webkit-scrollbar {
+            height: 9px;
+        }
+
+
+        .team-project-list::-webkit-scrollbar-thumb {
+
+            background: #bbb;
+
+            border-radius: 10px;
+        }
+
+
+        .team-project-list::-webkit-scrollbar-track {
+            background: #eee;
+        }
+
+
+        /* =========================================================
+           ★ 팀 프로젝트 카드 크기
+
+           가로 : 340px
+
+           이미지 비율 : 4 : 3
+
+           따라서 화면상의 이미지 크기는
+
+           약 340 × 255px
+        ========================================================== */
+
+        .team-project-list .project-card {
+
+            flex:
+                0 0 357px;
+
+            width: 357px;
+        }
+
+
+        /* =========================================================
+           8. 개인 포트폴리오
+
+           데스크톱 기준
+
+           4열 × 3줄
+
+           총 12개
+        ========================================================== */
+
+        .personal-project-list {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0, 1fr)
+                );
+
+            gap:
+                34px
+                30px;
+        }
+
+
+        /* =========================================================
+           9. 공통 프로젝트 카드
+        ========================================================== */
+
+        .project-card {
+
+            cursor: pointer;
+
+            min-width: 0;
+        }
+
+
+        .personal-project-list .project-card {
+
+            width: 100%;
+
+            min-width: 0;
+        }
+
+
+        /* =========================================================
+           10. 프로젝트 이미지 공통 설정
+        ========================================================== */
+
+        .project-image {
+
+            width: 100%;
+
+            object-fit: cover;
+
+            border-radius: 16px;
+
+            background: #ddd;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        /* =========================================================
+           ★ 팀 프로젝트 이미지
+
+           4 : 3
+
+           추천 원본 크기:
+
+           1200 × 900
+           또는
+           1600 × 1200
+        ========================================================== */
+
+        .team-project-list .project-image {
+
+            aspect-ratio:
+                4 / 3;
+        }
+
+
+        /* =========================================================
+           ★ 개인 포트폴리오 이미지
+
+           6 : 5
+
+           4:3보다 조금 더 정사각형에 가까운 형태
+
+           추천 원본 크기:
+
+           1200 × 1000
+           또는
+           1800 × 1500
+        ========================================================== */
+
+        .personal-project-list .project-image {
+
+            aspect-ratio:
+                6 / 5;
+        }
+
+
+        /* =========================================================
+           프로젝트 이미지 마우스 오버
+        ========================================================== */
+
+        .project-card:hover
+        .project-image {
+
+            transform:
+                translateY(-6px);
+
+            box-shadow:
+                0
+                12px
+                28px
+                rgba(0, 0, 0, 0.18);
+        }
+
+
+        /* =========================================================
+           프로젝트 이름
+        ========================================================== */
+
+        .project-name {
+
+            margin-top: 13px;
+
+            text-align: center;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================================================
+           11. 상세창 배경
+
+           프로젝트 클릭 시
+           사이트 전체가 반투명하게 어두워짐
+        ========================================================== */
+
+        .modal-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.52
+                );
+
+            z-index: 1000;
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        /* 상세창 활성화 */
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+
+        /* =========================================================
+           12. 프로젝트 상세창
+        ========================================================== */
+
+        .modal {
+
+            position: relative;
+
+            width:
+                min(
+                    1600px,
+                    96vw
+                );
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 65px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0
+                20px
+                60px
+                rgba(0, 0, 0, 0.3);
+        }
+
+        /* =========================================================
+        ★ 개인 포트폴리오 상세창 크기
+
+        팀 프로젝트보다 상세창을 작게 표시
+        ========================================================= */
+
+        .modal.personal-modal {
+
+            width:
+                min(
+                    1050px,
+                    92vw
+                );
+
+}
+
+
+        /* =========================================================
+           상세창 스크롤바
+        ========================================================== */
+
+        .modal::-webkit-scrollbar {
+            width: 9px;
+        }
+
+
+        .modal::-webkit-scrollbar-thumb {
+
+            background: #aaa;
+
+            border-radius: 10px;
+        }
+
+
+        .modal::-webkit-scrollbar-track {
+
+            background: #eee;
+
+            border-radius: 10px;
+        }
+
+
+        /* =========================================================
+           13. X 닫기 버튼
+        ========================================================== */
+
+        .modal-close {
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 24px;
+
+            width: 44px;
+
+            height: 44px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #eee;
+
+            font-size: 27px;
+
+            cursor: pointer;
+
+            z-index: 10;
+        }
+
+
+        .modal-close:hover {
+            background: #ddd;
+        }
+
+
+        /* =========================================================
+           14. 상세창 상단
+
+           왼쪽
+           = 프로젝트 이미지
+
+           오른쪽
+           = 포트폴리오 링크
+        ========================================================== */
+
+        .modal-top {
+            display: grid;
+
+            /* 이미지 / 파란박스1 / 파란박스2 */
+            grid-template-columns:
+                525px
+                1fr
+                1fr;
+
+            gap: 30px;
+
+            align-items: start;
+        }
+
+        .modal.personal-modal .modal-top {
+
+            grid-template-columns:
+                525px
+                1fr;
+
+}
+
+        /* =========================================================
+        개인 포트폴리오 상세창
+
+        두 번째 파란 박스를 사용하지 않으므로
+        이미지 + 첫 번째 파란 박스의 2열 구조로 변경
+        ========================================================= */
+
+        .modal.personal-modal .modal-top {
+
+            grid-template-columns:
+                525px
+                1fr;
+
+}
+
+
+        /* =========================================================
+           ★ 상세창 이미지
+
+           기본값은 팀 프로젝트 기준
+
+           4 : 3
+        ========================================================== */
+
+        .modal-image {
+
+            width: 100%;
+
+            aspect-ratio:
+                4 / 3;
+
+            object-fit: cover;
+
+            border-radius: 15px;
+
+            background: #ddd;
+        }
+
+
+        /* =========================================================
+           ★ 개인 포트폴리오를 클릭했을 때
+
+           상세창 이미지도
+
+           6 : 5
+
+           JavaScript에서 자동으로
+           personal-ratio 클래스를 추가함
+        ========================================================== */
+
+        .modal-image.personal-ratio {
+
+            aspect-ratio:
+                6 / 5;
+        }
+
+
+        /* =========================================================
+           상세창 프로젝트 이름
+        ========================================================== */
+
+        .modal-project-name {
+
+            margin-top: 14px;
+
+            text-align: center;
+
+            font-size: 22px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================================================
+           15. 프로젝트 링크 영역
+
+           링크가 많아지면
+           이 영역 안에서 스크롤됨
+        ========================================================== */
+
+        .modal-links {
+
+            height: 394px;
+
+            overflow-y: auto;
+
+            padding: 28px;
+
+            background: #d9e4ff;
+
+            border-radius: 15px;
+        }
+
+
+        .modal-links::-webkit-scrollbar {
+            width: 9px;
+        }
+
+
+        .modal-links::-webkit-scrollbar-thumb {
+
+            background: #aaa;
+
+            border-radius: 10px;
+        }
+
+
+        .modal-links::-webkit-scrollbar-track {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.5
+                );
+
+            border-radius: 10px;
+        }
+
+
+        /* =========================================================
+           링크 하나
+        ========================================================== */
+
+        .portfolio-link {
+
+            margin-bottom: 27px;
+        }
+
+
+        .portfolio-link:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .portfolio-link h3 {
+
+            margin:
+                0
+                0
+                8px;
+
+            font-size: 21px;
+        }
+
+        /* =========================================================
+            두 번째 파란 박스 중간 제목
+        ========================================================= */
+
+        .portfolio-subtitle {
+            margin: 10px 0 6px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+
+        .portfolio-link a {
+
+            color: #222;
+
+            font-size: 18px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            word-break: break-all;
+
+            /* 왼쪽 들여쓰기 */
+            padding-left: 12px;
+        }
+
+
+        .portfolio-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* 일반 텍스트 설정 */
+        .portfolio-link p {
+            margin: 0;
+
+            font-size: 16px;
+
+            line-height: 1.5;
+
+        /* \n을 실제 줄바꿈으로 표시 */
+            white-space: pre-line;
+
+        /* 왼쪽 들여쓰기 */
+            padding-left: 0px;
+        }
+
+
+        /* =========================================================
+           16. 프로젝트 상세 설명
+
+           line-height
+           = 줄 간격
+
+           현재 1.4
+
+           더 좁게:
+           1.3
+
+           더 넓게:
+           1.5 ~ 1.6
+        ========================================================== */
+
+        .modal-description {
+
+            margin-top: 35px;
+
+            font-size: 17px;
+
+            line-height: 1.4;
+        }
+
+        /* =========================================================
+        프로젝트 상세 정보 강조
+
+        제작 기간 / 제작 인원 / 담당 역할
+        ========================================================= */
+
+        .project-summary {
+
+            font-size: 19px;
+
+            font-weight: 700;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           17. 반응형
+
+           화면이 작아졌을 때
+           레이아웃 자동 조절
+        ========================================================== */
+
+        @media
+        (max-width: 1250px) {
+
+
+            .page {
+
+                width:
+                    calc(100% - 60px);
+
+                padding: 50px;
+            }
+
+
+            .main-layout {
+
+                grid-template-columns:
+                    250px
+                    minmax(0, 1fr);
+
+                gap: 50px;
+            }
+
+
+            /* 개인 포트폴리오 3열 */
+
+            .personal-project-list {
+
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(0, 1fr)
+                    );
+            }
+
+
+            .modal-top {
+
+                grid-template-columns:
+                    minmax(0, 1.2fr)
+                    minmax(250px, 0.8fr);
+            }
+
+        }
+
+
+        @media
+        (max-width: 850px) {
+
+
+            .page {
+
+                width:
+                    calc(100% - 30px);
+
+                padding:
+                    40px
+                    30px;
+            }
+
+
+            .header {
+                flex-direction: column;
+            }
+
+
+            .header h1 {
+                font-size: 38px;
+            }
+
+
+            .main-layout {
+
+                grid-template-columns:
+                    1fr;
+
+                gap: 45px;
+            }
+
+
+            .profile-image {
+                max-width: 280px;
+            }
+
+
+            /* 개인 포트폴리오 2열 */
+
+            .personal-project-list {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0, 1fr)
+                    );
+            }
+
+
+            /* 팀 프로젝트 카드 살짝 축소 */
+
+            .team-project-list .project-card {
+
+                flex:
+                    0 0 300px;
+
+                width: 300px;
+            }
+
+
+            .modal {
+
+                padding:
+                    55px
+                    30px
+                    35px;
+            }
+
+
+            /* 상세창 세로 배치 */
+
+            .modal-top {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .modal-image {
+
+                max-width: 600px;
+
+                margin: 0 auto;
+            }
+
+
+            .modal-links {
+                height: 300px;
+            }
+
+        }
+
+
+        @media
+        (max-width: 520px) {
+
+
+            .page {
+
+                width: 100%;
+
+                border: none;
+
+                padding:
+                    30px
+                    20px;
+            }
+
+
+            .header h1 {
+                font-size: 31px;
+            }
+
+
+            /* 개인 포트폴리오 1열 */
+
+            .personal-project-list {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .team-project-list .project-card {
+
+                flex:
+                    0 0 260px;
+
+                width: 260px;
+            }
+
+        }
+
+        /* =========================================
+            첫 진입 Fade Up
+        ========================================= */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .intro-reveal {
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        /* 등장 순서 */
+        .header.intro-reveal {
+            animation-delay: 0.1s;
+        }
+
+        .profile.intro-reveal {
+            animation-delay: 0.35s;
+        }
+
+
+        
+        /* =========================================
+        스크롤 Fade Up
+        ========================================= */
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(25px);
+
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 카드 순차 등장 */
+        .project-card.scroll-reveal:nth-child(4n + 2) {
+            transition-delay: 0.07s;
+        }
+
+        .project-card.scroll-reveal:nth-child(4n + 3) {
+            transition-delay: 0.14s;
+        }
+
+        .project-card.scroll-reveal:nth-child(4n + 4) {
+            transition-delay: 0.21s;
+        }
+
+
+        
+        /* =========================================
+        상세창 등장 애니메이션
+        ========================================= */
+
+        .modal {
+            opacity: 0;
+            transform: translateY(16px) scale(0.975);
+
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .modal-overlay.active .modal {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        
+        /* =========================================
+        팀 프로젝트 좌우 이동 버튼
+        ========================================= */
+
+        .team-list-wrap {
+            position: relative;
+            min-width: 0;
+        }
+
+        .team-arrow {
+            position: absolute;
+            top: 40%;
+            z-index: 5;
+
+            width: 40px;
+            height: 40px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+
+            font-size: 22px;
+            color: #333;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .team-arrow:hover {
+            background: #d9e4ff;
+            transform: scale(1.08);
+        }
+
+        .team-arrow.prev {
+            left: -18px;
+        }
+
+        .team-arrow.next {
+            right: -18px;
+        }
+
+        
+
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+<!-- =============================================================
+     전체 사이트
+============================================================= -->
+
+<div class="page">
+
+
+    <!-- =========================================================
+         사이트 상단
+    ========================================================== -->
+
+    <header class="header intro-reveal">
+
+
+        <div>
+
+
+            <!-- =================================================
+                 [수정할 곳]
+
+                 메인 제목
+            ================================================== -->
+
+            <h1>
+
+                신입 게임 기획자 엄기황 포트폴리오
+
+            </h1>
+
+
+            <!-- =================================================
+                 [수정할 곳]
+
+                 간단한 자기소개
+
+                 한 줄 추가하려면
+
+                 텍스트<br>
+
+                 형식으로 추가
+            ================================================== -->
+
+            <p class="intro">
+                <br>
+                안녕하세요! 신입 게임 기획자 엄기황 입니다! <br>
+                <br>
+                저는 게임에 대해 배우며 여러 팀 프로젝트 경험으로 협업과 소통의 중요성을 배웠고, 때론 막히고 실패해본 경험으로 다시 한번 일어나 도전하는 방법도 배웠습니다. <br>
+                단순히 게임을 '개발' 하는것이 아닌 어떻게 해야 유저가 재미를 느끼고, 몰입하며, 어떤 경험을 할지 고민하면서 게임을 '설계'하는 것을 중점으로 게임을 만들어 왔습니다. <br>
+                <br>
+                게임이란 즐거움과 재미를 느끼는 것을 넘어 다양하고 새로운 경험을 하며, 어떨때는 배움과 깨달음을 얻고 자신을 한 단계 더 성장할 수 있게 만드는 것이라고 생각합니다. <br> 
+                그래서 저는 '게임' 이라는 하나의 매체를 통하여, 수많은 사람들이 게임을 즐기고, 경험하며 다양한 감정을 느낄 수 있는 게임을 만드는 '게임 기획자'가 되고 싶습니다! <br>
+
+            </p>
+
+
+        </div>
+
+
+
+
+    </header>
+
+
+
+    <!-- =========================================================
+         메인 영역
+    ========================================================== -->
+
+    <main class="main-layout">
+
+
+        <!-- =====================================================
+             왼쪽 프로필
+        ====================================================== -->
+
+        <aside class="profile intro-reveal">
+
+
+            <!-- =================================================
+                 [수정할 곳]
+
+                 프로필 사진
+
+                 예:
+
+                 src="Image/Profile.png"
+
+                 ※ 프로필 사진은
+                 프로젝트 이미지 비율과 관계없음
+            ================================================== -->
+
+            <img
+
+                class="profile-image"
+
+                src="Image/Profile_Picture.jpg"
+
+                alt="프로필 이미지"
+
+            >
+
+
+            <!-- =================================================
+                 [수정할 곳]
+
+                 개인정보
+            ================================================== -->
+
+            <div class="profile-info">
+
+                <!-- 이름 : 이 줄만 크게 -->
+                <p class="profile-name">엄기황</p>
+
+                <!-- 나머지 인적사항 -->
+                <p>2003. 01. 14 (만 23)</p>
+
+                <p>010-3406-6678</p>
+
+                <p>cjdwh0114@naver.com</p>
+
+                <br>
+
+                <p><a href="https://eegmoney-game-design-factory.tistory.com/"
+                target="_blank"
+                rel="noopener noreferrer">
+                엄기황 블로그 바로가기
+                </a></p>
+
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- =====================================================
+             오른쪽 콘텐츠
+        ====================================================== -->
+
+        <div class="content">
+
+
+            <!-- =================================================
+                 팀 프로젝트
+            ================================================== -->
+
+            <section class="section">
+
+
+                <h2 class="section-title scroll-reveal">
+
+                    팀 프로젝트
+
+                </h2>
+
+
+               <div class="team-list-wrap">
+
+                <button
+                    class="team-arrow prev"
+                    type="button"
+                    onclick="scrollTeam(-1)"
+                    aria-label="이전 팀 프로젝트"
+                >
+                    &#10094;
+                </button>
+
+                <div class="team-project-list">
+
+
+                    <!-- =================================================
+                         팀 프로젝트 1
+
+                         ★ 이미지 비율 4:3
+
+                         권장 이미지:
+                         1200 × 900
+
+                         [수정할 곳]
+                         src에 이미지 경로 입력
+                    ================================================== -->
+
+                    <div
+
+                        class="project-card scroll-reveal"
+
+                        onclick="openModal('team1')"
+
+                    >
+
+                        <img
+
+                            class="project-image"
+
+                            src="Image/Team_Project/ProjectDiaspora.png"
+
+                            alt="팀 프로젝트 1"
+
+                        >
+
+                        <div class="project-name">
+
+                            Project : Diaspora
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         팀 프로젝트 2
+                    ================================================== -->
+
+                    <div
+
+                        class="project-card scroll-reveal"
+
+                        onclick="openModal('team2')"
+
+                    >
+
+                        <img
+
+                            class="project-image"
+
+                            src="Image/Team_Project/CampusRunner.png"
+
+                            alt="팀 프로젝트 2"
+
+                        >
+
+                        <div class="project-name">
+
+                            캠퍼스 러너
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         팀 프로젝트 3
+                    ================================================== -->
+
+                    <div
+
+                        class="project-card scroll-reveal"
+
+                        onclick="openModal('team3')"
+
+                    >
+
+                        <img
+
+                            class="project-image"
+
+                            src="Image/Team_Project/PlanetPlants.png"
+
+                            alt="팀 프로젝트 3"
+
+                        >
+
+                        <div class="project-name">
+
+                            Planet Plants
+
+                        </div>
+
+                     </div>
+
+
+                     </div> <!-- team-project-list 끝 -->
+
+                    <button
+                        class="team-arrow next"
+                        type="button"
+                        onclick="scrollTeam(1)"
+                        aria-label="다음 팀 프로젝트"
+                    >
+                        &#10095;
+                    </button>
+
+                </div> <!-- team-list-wrap 끝 -->
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 개인 포트폴리오
+
+                 ★ 6:5 비율
+
+                 ★ 4 × 3
+
+                 총 12개
+            ================================================== -->
+
+            <section class="section">
+
+
+                <h2 class="section-title scroll-reveal">
+
+                    개인 포트폴리오
+
+                </h2>
+
+
+                <div class="personal-project-list">
+
+
+                    <!-- =================================================
+                         개인 포트폴리오 1
+
+                         추천 이미지:
+                         1200 × 1000
+                    ================================================== -->
+
+                    <div
+                        class="project-card scroll-reveal"
+                        onclick="openModal('personal1')"
+                    >
+
+                        <img
+                            class="project-image"
+                            src="Image/Um_Portfolio/ProjectA_Character_Concept.png"
+                            alt="개인 포트폴리오 1"
+                        >
+
+                        <div class="project-name">
+                            Project : A <br> 창작 캐릭터 컨셉 기획서
+                        </div>
+
+                    </div>
+
+
+                    <!-- 개인 포트폴리오 2 -->
+
+                    <div
+                        class="project-card scroll-reveal"
+                        onclick="openModal('personal2')"
+                    >
+
+                        <img
+                            class="project-image"
+                            src="Image/Um_Portfolio/ProjectA_Character_Animation.png"
+                            alt="개인 포트폴리오 2"
+                        >
+
+                        <div class="project-name">
+                            Project : A <br> 창작 캐릭터 애니메이션 기획서
+                        </div>
+
+                    </div>
+
+
+                    <!-- 개인 포트폴리오 3 -->
+
+                    <div
+                        class="project-card scroll-reveal"
+                        onclick="openModal('personal3')"
+                    >
+
+                        <img
+                            class="project-image"
+                            src="Image/Um_Portfolio/ProjectA_System.png"
+                            alt="개인 포트폴리오 3"
+                        >
+
+                        <div class="project-name"> 
+                            Project : A <br> 창작 시스템 기획서
+                        </div>
+
+                    </div>
+
+
+                    <!-- 개인 포트폴리오 4 -->
+
+                    <div
+                        class="project-card scroll-reveal"
+                        onclick="openModal('personal4')"
+                    >
+
+                        <img
+                            class="project-image"
+                            src="Image/Um_Portfolio/Distres & Deceive.png"
+                            alt="개인 포트폴리오 4"
+                        >
+
+                        <div class="project-name">
+                            Distres & Deceive <br> 창작 게임 초안 기획서
+                        </div>
+
+                    </div>
+
+
+                    <!-- 개인 포트폴리오 5 -->
+
+                    <div
+                        class="project-card scroll-reveal"
+                        onclick="openModal('personal5')"
+                    >
+
+                        <img
+                            class="project-image"
+                            src="Image/Um_Portfolio/Genshin_ElementSystemAnalysisReport.png"
+                            alt="개인 포트폴리오 5"
+                        >
+
+                        <div class="project-name">
+                            원신 : 원소 시스템 분석서
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =============================================================
+     프로젝트 상세창
+
+     여기의 내용은 직접 수정할 필요 없음.
+
+     아래 JavaScript의 projects에서
+     자동으로 내용을 가져옴.
+============================================================= -->
+
+<div
+
+    class="modal-overlay"
+
+    id="projectModal"
+
+    onclick="backgroundClose(event)"
+
+>
+
+
+    <div class="modal">
+
+
+        <!-- =====================================================
+             닫기 버튼
+        ====================================================== -->
+
+        <button
+
+            class="modal-close"
+
+            onclick="closeModal()"
+
+        >
+
+            ×
+
+        </button>
+
+
+
+        <div class="modal-top">
+
+        <!-- ================================
+            왼쪽 : 프로젝트 이미지
+        ================================= -->
+
+        <div class="modal-image-area">
+
+            <img
+                id="modalImage"
+                class="modal-image"
+                src=""
+                alt="프로젝트 상세 이미지"
+            >
+
+            <div
+                class="modal-project-name"
+                id="modalProjectName"
+            >
+        </div>
+
+    </div>
+
+
+        <!-- ================================
+            가운데 파란 박스
+
+            장르 / 게임 설명 / 영상 등
+        ================================= -->
+
+        <div
+            class="modal-links"
+            id="modalLinks"
+        >
+        </div>
+
+
+        <!-- ================================
+            오른쪽 파란 박스
+
+            기획서 / 작업물 등
+        ================================= -->
+
+        <div
+            class="modal-links"
+            id="modalLinks2"
+        >
+        </div>
+
+</div>
+
+
+
+        <!-- =====================================================
+             프로젝트 설명
+        ====================================================== -->
+
+        <div
+
+            class="modal-description"
+
+            id="modalDescription"
+
+        >
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ================================================================================================================================================================
+
+     JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript
+
+     JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript
+
+     JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript
+
+=================================================================================================================================================================-->
+
+<script>
+
+
+    /* =========================================================
+       ★★★★★ 프로젝트 데이터 ★★★★★
+
+
+       여기에서 각 프로젝트를 따로 수정하면 됨.
+
+
+       title
+       = 프로젝트 제목
+
+
+       image
+       = 상세창에 표시되는 이미지
+
+
+       description
+       = 프로젝트 설명
+
+
+       links
+       = 기획서 / PDF / 영상 / 문서 등의 링크
+
+
+       =========================================================
+
+       ★ 팀 프로젝트 이미지
+
+       4 : 3
+
+       추천:
+       1200 × 900
+
+
+       ★ 개인 포트폴리오 이미지
+
+       6 : 5
+
+       추천:
+       1200 × 1000
+
+    ========================================================== */
+
+
+    const projects = {
+
+
+        /* =====================================================
+           팀 프로젝트 1
+        ====================================================== */
+
+        team1: {
+
+
+            /* =================================================
+               [수정할 곳]
+
+               프로젝트 이름
+            ================================================== */
+
+            title:
+                "Project : Diaspora",
+
+
+            /* =================================================
+               [수정할 곳]
+
+               상세창 이미지
+
+               예:
+
+               Image/ProjectDiaspora.png
+            ================================================== */
+
+            image:
+                "Image/Team_Project/ProjectDiaspora.png",
+
+
+            /* =================================================
+               [수정할 곳]
+
+               프로젝트 설명
+
+
+               <br>
+               = 줄바꿈
+
+
+               <br><br>
+               = 한 줄 띄우기
+            ================================================== */
+
+            description: `
+
+                <div class="project-summary">
+                제작 기간 : 2025. 03 ~ 2026. 08 <br>
+                제작 인원 : 10명 <br>
+                담당 역할 : 팀장 | 시스템, UI, 영상 기획 / 제작 | 일정 관리 | 기타 업무 <br>
+                </div>
+
+                <br>
+                약 1년간 팀원들과 협업하여 제작하고, 약 반년동안 일부 팀원들끼리 더 제작하여 출시까지 경험한 게임입니다.  <br>
+                제안서와 초기 기획부터 UI 및 시스템 기획, UI 제작 및 영상 제작, 팀원의 일정 관리를 맡아서 진행했습니다. <br>
+                <br>
+                이 프로젝트를 진행하면서 협업과 소통이 얼마나 중요한지 알게되는 경험이었습니다. <br>
+                소통이 원활하지 않아 서로의 생각과 다른 결과물이 나오고, 작업의 진행이 더뎌졌으며, 더 나아가 제대로된 게임이 나오지 않았었습니다. <br>
+                이를 통해 효율적이고 완성도 있는 프로젝트를 진행하기 위해 일정 관리부터 시작해서 팀원들 사이의 다리가 되어 협업과 소통이 원활하도록 노력하였습니다. <br>
+                이후 최종적으로는 높은 점수를 받았었고, 팀원들끼리 조금씩 더 개발하여 제작 완료 및 추가적인 경험을 위해 출시까지 마무리하였습니다. <br>
+                <br>
+                처음엔 막막하고 어려웠던 프로젝트였지만, 마지막에는 좋은 결과와 값진 경험으로 기억되는 프로젝트입니다. 
+
+            `,
+
+
+            /* =================================================
+               [수정할 곳]
+
+               프로젝트 링크
+
+
+               링크를 추가하려면:
+
+
+               {
+                   title: "링크 이름",
+                   url: "실제 링크"
+               },
+
+
+               형식으로 추가
+            ================================================== */
+
+            links: [
+
+                {
+
+                    title:
+                        "장르",
+
+                    text:
+                        "3D, 싱글, 어드벤처, 퍼즐"
+
+                },
+
+                {
+
+                    title:
+                        "게임 설명",
+
+                    text:
+                        "미지의 행성 디아스포라.\n 주인공은 이 행성을 탐사하라는 임무를 받게되고, 이곳의 퍼즐과 유적을 탐사하며 임무를 완수해야 한다."
+
+                },
+
+                {
+
+                    title:
+                        "게임 페이지",
+
+                    linkText: "- 게임 페이지 바로가기",
+
+                    url:
+                        "https://store.steampowered.com/app/4208620/Project_Diaspora___Planet_Exploration/?beta=0"
+
+                },
+
+                {
+
+                    title:
+                        "게임 영상",
+                    
+                    linkText: "- 게임 영상 재생하기",
+
+                    url:
+                        "https://drive.google.com/file/d/1zRHLFudrMixvOopey4BPV5dWn_waa2aF/view?usp=drive_link"
+
+                }
+
+            ],
+
+            /* =================================================
+                ★ 두 번째 파란 박스
+                프로젝트 작업물
+            ================================================= */
+
+            links2: [
+
+                {
+                    title: "제안서 및 초기 기획서",
+                    url: "https://url.kr/jvdeyz",
+                    linkText: "- 게임 제안서"
+                },
+
+                {
+                    url: "https://url.kr/iq7or1",
+                    linkText: "- 게임 초기 기획서"
+                },
+
+                {
+                    title: "게임 시스템 기획서",
+                    linkText: "- 기본 시스템 기획서",
+                    url: "https://url.kr/4m5ibf"
+                },
+
+                {
+                    linkText: "- 기믹 시스템 기획서",
+                    url: "https://url.kr/nm1ku9"
+                },
+
+                {
+                    linkText: "- 몬스터 AI 시스템 기획서",
+                    url: "https://url.kr/cjnnfg"
+                },
+
+                {
+                    linkText: "- 시간 시스템 기획서",
+                    url: "https://url.kr/lm2qmf"
+                },
+
+                {
+                    linkText: "- 아이템 시스템 기획서",
+                    url: "https://url.kr/8f1qgf"
+                },
+
+                {
+                    linkText: "- 인벤토리 시스템 기획서",
+                    url: "https://url.kr/4im2mn"
+                },
+
+                {
+                    linkText: "- 퀘스트 시스템 기획서",
+                    url: "https://url.kr/zvdisj"
+                },
+
+                {
+                    linkText: "- PDA 시스템 기획서",
+                    url: "https://url.kr/fwgvk6"
+                },
+
+                {
+                    title: "게임 UI/UX 기획서",
+                    linkText: "- 게임 UI/UX 기획서",
+                    url: "https://url.kr/er6i2m"
+                },
+
+                {
+                    title: "게임 연출 기획서",
+                    linkText: "- 게임 연출 기획서",
+                    url: "https://url.kr/ijuv9m"
+                },
+
+                {
+                    title: "일정 관리",
+                    linkText: "- 개발 일정 및 목표 정리",
+                    url: "https://drive.google.com/file/d/1lfQRDaVUWp_pR4gEUtrW1Cok9adCflg1/view?usp=drive_link"
+                },
+
+                {
+                    linkText: "- 일정 간트 차트",
+                    url: "https://docs.google.com/spreadsheets/d/1Ldb0h7wf1SiMYobvVJkiPvzV5-5Huypx/edit?usp=drive_link&ouid=117573050090462836675&rtpof=true&sd=true"
+                },
+
+                {
+                    title: "UI 제작 모음",
+                    linkText: "- UI 제작 모음",
+                    url: "https://url.kr/kkolq3"
+                }
+
+            ]
+
+        },
+
+
+
+        /* =====================================================
+           팀 프로젝트 2
+        ====================================================== */
+
+        team2: {
+
+            title:
+                "캠퍼스 러너 / Campus Runner",
+
+            image:
+                "Image/Team_Project/CampusRunner.png",
+
+            description: `
+
+                <div class="project-summary">
+                제작 기간 : 2025. 09 ~ 2025. 12 <br>
+                제작 인원 : 10명 <br>
+                담당 역할 : 추가 보조 기획 | 밸런스 조정 및 최적화 작업 | 맵, NPC 배치 등 기타 작업  <br>
+                </div>
+
+                <br>
+                졸업 작품인 'Project : Diaspora'와 병행하여 진행한 서브 프로젝트 입니다. <br>
+                학교 내 입학홍보처와 함께 학교를 홍보하기 위한 목적을 가지고 제작한 게임이고, 여러 학생들이 익숙함을 느낄 수 있도록 광고에서 자주 보인 게임 방식을 벤치마킹 하였습니다. <br>
+                <br>
+                저는 이 프로젝트에 추가적인 보조 기획과 밸런스 조정을 위해 팀에 영입되었습니다. <br>
+                기존에 있던 기획서들의 내용을 참고하여 초안 기획서를 작성해서 제작에 큰 틀을 잡았고, 이후에 UI 기획서와 추가적으로 필요한 애니메이션/이펙트를 기획했습니다. <br>
+                이외에도 최적화 작업과, 맵과 NPC를 배치하여 맵을 구성하는 등 기타 업무도 병행하여 진행하였습니다. <br>
+                <br>
+                다른 프로젝트와 병행하며 진행하다보니 힘들기도 했고 어려운 점이 있기도 하였습니다. 그래도 새로운 팀원들과 소통하고, 협업하며 진행하다 보니 새로운 느낌도 들고, 재밌게 개발했던 것 같습니다. <br>
+                이 후 프로젝트는 무사히 종료 되었으며, 소정의 장학금을 받고 프로젝트를 완료하였습니다. 
+
+
+            `,
+
+            links: [
+
+                {
+
+                    title:
+                        "장르",
+
+                    text:
+                        "3D 슈팅, 로그라이트"
+
+                },
+
+                {
+
+                    title:
+                        "게임 설명",
+
+                    text:
+                        "'다가오는 유혹들을 물리치고 취업에 성공하자!'\n 플레이어블 캐릭터를 조작하여 다가오는 몬스터를 피하고 캐릭터의 능력치를 강화하여 최종 보스까지 물리쳐야 하는 게임."
+
+                },
+
+                {
+
+                    title : 
+                        "게임 플레이 영상",
+                    
+                    linkText : 
+                        "- 게임 시연 영상 재생 (약 1분)",
+                    
+                    url : 
+                        "https://drive.google.com/file/d/1u70IeekZfq-3SmByFuSUXnG8aTJljGpG/view?usp=drive_link"
+                }
+
+            ],
+
+            /* =================================================
+                ★ 두 번째 파란 박스
+                프로젝트 작업물
+            ================================================= */
+
+            links2: [
+
+                {
+                    title: "게임 초안 기획서",
+                    linkText: "- 게임 초안 기획서",
+                    url : "https://drive.google.com/file/d/1ZWaO641OnnTQ0pEvtjrue1mjEpZ9DfPg/view?usp=drive_link"
+                },
+
+                {
+                    title: "게임 UI/UX 기획서",
+                    linkText: "- 게임 UI/UX 기획서",
+                    url : "https://drive.google.com/file/d/1i7jyUlxprAsOKz0mgjEgVe_R7taTfGYr/view?usp=drive_link"
+                },
+
+                {
+                    title: "애니메이션/이펙트 기획서",
+                    linkText: "- 추가 애니메이션 기획서",
+                    url : "https://drive.google.com/file/d/1NeQSha-N12jiwe6QV6krea1CN2tBuTSX/view?usp=drive_link"
+                },
+
+                {
+                    linkText: "- 추가 이펙트 기획서",
+                    url : "https://drive.google.com/file/d/1rIhU9s8Kh49z9Sn1DJlG1NlqnGU0Xap-/view?usp=drive_link"
+                }
+
+            ]
+
+        },
+
+
+
+        /* =====================================================
+           팀 프로젝트 3
+        ====================================================== */
+
+        team3: {
+
+            title:
+                "PLANET PLANTS",
+
+            image:
+                "Image/Team_Project/PlanetPlants.png",
+
+            description: `
+
+                <div class="project-summary">
+                제작 기간 : 2024. 03 ~ 2024. 06 <br>
+                제작 인원 : 6명 <br>
+                담당 역할 : 초기 기획 및 일부 UI 제작 | 일정 관리 <br>
+                </div>
+
+                <br>
+                2학년 1학기 시절 제작한 게임 팀 프로젝트 입니다. <br>
+                초기에는 3D 팜류 게임으로 제작을 목표로 하였지만, 기술적 한계와 짧은 기간에 부딪혀 미니게임 형식의 게임으로 제작하였습니다. <br>
+                저는 게임 제안부터 시작하여 전체적인 기획을 맡았으며, 일부 UI를 제작하고 팀의 일정 관리를 담당하였습니다. <br>
+                <br>
+                최종적으로는 처음 기획했던 게임과는 많이 다른 형태로 제작이 되었고, 이후 프로젝트는 완료가 되었지만 일부 팀원과는 헤어지게 되기도 하였습니다. <br>
+                이 프로젝트를 통해서 게임 제작이 그저 게임을 하고 보는 거와는 다르다는 것과, 게임 개발을 하기엔 현재 저는 너무 부족하다고 느꼈습니다.<br>
+                하지만 게임 개발을 진행하는게 재밌었고, 한편으로는 게임을 만든다는 것에 설렘과 두근거림이 저를 다시 한번 도전하게 하는 계기가 되었습니다.   <br>
+                <br>
+                이를 바탕으로 저는 저에게 부족한 점을 찾아서 학교와 학원, 자기주도 학습을 하며 지금도 다양한 게임을 분석하면서 조금씩 부족한 곳을 채우고 있습니다.   <br>
+                결과적으론 실패한 프로젝트라고 볼 수도 있지만, 저에게는 다시 한번 저를 돌아볼 수 있게 한, 그리고 다시 도전할 수 있게 발판이 되어준 기억에 남는 프로젝트 중 하나입니다. <br>
+
+            `,
+
+            links: [
+
+                {
+
+                    title:
+                        "장르",
+
+                    text :
+                        "3D, 탄막 슈팅, 미니게임"
+
+                },
+
+                {
+
+                    title:
+                        "게임 설명",
+
+                    text :
+                        "별이 빛나는 미지의 행성. \n 주인공은 이곳에 사는 외계인들의 공격을 피해 \n 이 행성의 식물들을 재배하여 지구로 보내야 한다."
+
+                },
+
+                {
+                    title : 
+                        "게임 플레이 영상",
+
+                    linkText : 
+                        "- 게임 시연 영상 (약 4분)",
+
+                    url : 
+                        "https://drive.google.com/file/d/18k6Y8DNHRFoqXguS-2_iwc9C1DU9ZTXg/view?usp=drive_link"
+                }
+
+            ],
+
+            /* =================================================
+                ★ 두 번째 파란 박스
+                프로젝트 작업물
+            ================================================= */
+
+            links2: [
+
+                {
+                    title: "게임 제안서 & 초기 기획서",
+                    linkText: "- 게임 제안서",
+                    url : "https://drive.google.com/file/d/1z9ueRZup4DOQvXU47DSNz4gOKp1UJVXH/view?usp=drive_link"
+                },
+
+                {
+                    linkText : "- 초기 기획서",
+                    url : "https://drive.google.com/file/d/1t-GUrxurYiiMbW2xHZ7zjBIVGVKXZ3Mq/view?usp=drive_link"
+                },
+                
+                {
+                    title: "기타 문서",
+                    linkText: "- 미니게임 기획서",
+                    url : "https://drive.google.com/file/d/11p_3c-2zMG7cCzj1za9qNUaK4R6sjnQ-/view?usp=drive_link"
+                },
+
+                {
+                    linkText : "- 최종 발표 자료(최종 개발 내용)",
+                    url : "https://drive.google.com/file/d/1EoSidl5C_cT6Ktaxk_vCGCh9D3zonUBV/view?usp=drive_link"
+                },
+
+                {
+                    linkText : "- 일정 관리 표(24. 05 5주차 ~ 24. 06 3주차)",
+                    url : "https://docs.google.com/spreadsheets/d/1TopVZFwFJburvjnDnmvRpJqSJmNFj36q/edit?usp=drive_link&ouid=117573050090462836675&rtpof=true&sd=true"
+                }
+
+            ]
+
+        },
+
+
+
+        
+
+
+        /* =====================================================
+           개인 포트폴리오 1
+        ====================================================== */
+
+        personal1: {
+
+            title:
+                "Project : A 창작 캐릭터 컨셉 기획서",
+
+            image:
+                "Image/Um_Portfolio/ProjectA_Character_Concept.png",
+
+            description: `
+                제작 기간 : 2025. 06 <br><br>
+
+                실시간 대전 격투 게임인 '철권 8'에서 영감을 얻어 구상한 'Project : A' 라는 창작 게임의 캐릭터 컨셉을 구상하여 제작하였습니다. <br>
+                캐릭터의 2D 및 3D 디자인 컨셉부터 각 캐릭터의 상세 설명과 예시 이미지를 활용하여 총 5개의 캐릭터를 창작하였습니다. 
+
+            `,
+
+            links: [
+
+                {
+
+                    title:
+                        "포트폴리오 보기",
+
+                    url:
+                        "https://drive.google.com/file/d/1Q7_wR1MmuRAyU36Sfy5vGZBuhbFkiZBX/view?usp=sharing"
+
+                }
+
+            ]
+
+        },
+
+
+
+        /* =====================================================
+           개인 포트폴리오 2
+        ====================================================== */
+
+        personal2: {
+
+            title:
+                "Project : A 창작 캐릭터 애니메이션 기획서",
+
+            image:
+                "Image/Um_Portfolio/ProjectA_Character_Animation.png",
+
+            description: `
+
+                제작 기간 : 2025. 07 <br><br>
+
+                창작 게임 'Project : A'에 등장하는 캐릭터 5종의 애니메이션을 창작한 기획서 입니다. <br>
+                전체적인 애니메이션 컨셉과 실제 동작 및 타 게임 애니메이션을 프레임 단위로 가져와 예시 이미지로 활용하였습니다. 
+
+            `,
+
+            links: [
+
+                {
+
+                    title:
+                        "포트폴리오 보기",
+
+                    url:
+                        "https://drive.google.com/file/d/1lDnx03vwXx2rkg-MaT1woSn98uFZQlld/view?usp=sharing"
+
+                }
+
+            ]
+
+        },
+
+
+
+        /* =====================================================
+           개인 포트폴리오 3
+        ====================================================== */
+
+        personal3: {
+
+            title:
+                "Project : A 창작 시스템 기획서",
+
+            image:
+                "Image/Um_Portfolio/ProjectA_System.png",
+
+            description: `
+
+                제작 기간 : 2025. 07 ~ 2025. 08 <br><br>
+
+                창작 게임 'Project : A'의 플레이어블 캐릭터의 시스템 및 전투 시스템에 관하여 구상한 창작 시스템 기획서 입니다. <br>
+                캐릭터의 조작과 능력치, 전투 및 승리 조건 등에 대해 예시 이미지와 플로우 차트를 활용하여 작성하였습니다. 
+
+
+            `,
+
+            links: [
+
+                {
+
+                    title:
+                        "포트폴리오 보기",
+
+                    url:
+                        "https://drive.google.com/file/d/1WBbbTTDM_GQQT-V8SxKAN0bNB7KMfm5Y/view?usp=sharing"
+
+                }
+
+            ]
+
+        },
+
+
+
+        /* =====================================================
+           개인 포트폴리오 4
+        ====================================================== */
+
+        personal4: {
+
+            title:
+                "Distres & Deceive 창작 게임 초안 기획서",
+
+            image:
+                "Image/Um_Portfolio/Distres & Deceive.png",
+
+            description: `
+                제작 기간 : 2025. 11 ~ 2025. 12 <br><br>
+
+                마피아 형식의 다양한 사회적 추론 게임들을 보고 영감을 얻어 작성한 창작 게임 기획서 입니다. <br>
+                그리고 생존 게임의 기본적인 시스템(배고픔, 갈증 등)을 넣어 좀 더 전략적인 플레이 할 수 있도록 구상했습니다. <br> <br>
+                
+                게임명은 Distres(조난) + Deceive(속이다)를 조합하여 조난자와 속이는 사람(배신자)을 의미하는 이름입니다. 
+
+            `,
+
+            links: [
+
+                {
+
+                    title:
+                        "포트폴리오 보기",
+
+                    url:
+                        "https://drive.google.com/file/d/1ug7t1YdBTgqfU2PdZYVSsYIrwCB0eLGa/view?usp=drive_link"
+
+                }
+
+            ]
+
+        },
+
+
+
+        /* =====================================================
+           개인 포트폴리오 5
+        ====================================================== */
+
+        personal5: {
+
+            title:
+                "원신 : 원소 시스템 분석서",
+
+            image:
+                "Image/Um_Portfolio/Genshin_ElementSystemAnalysisReport.png",
+
+            description: `
+
+                제작 기간 : 2025. 12 ~ 2026. 01 <br><br>
+
+                제가 오래 플레이 해온 게임 중 하나인 '원신'의 원소 시스템을 분석해 보았습니다. <br>
+                게임 내 원소가 어떤식으로 부착, 반응, 소멸 하는지에 대해 공개 자료를 참고하며 직접 플레이 및 실험으로 시스템을 분석하였습니다. 
+
+            `,
+
+            links: [
+
+                {
+
+                    title:
+                        "포트폴리오 보기",
+
+                    url:
+                        "https://drive.google.com/file/d/1geiiRIW0mmZmpJ8cA0hFXC3ZgKMZQUra/view?usp=drive_link"
+
+                }
+
+            ]
+
+        }
+
+    };
+
+
+
+    /* =========================================================
+       프로젝트 상세창 열기
+    ========================================================== */
+
+    function openModal(projectId) {
+
+
+    /* =====================================================
+       선택한 프로젝트 데이터 가져오기
+    ====================================================== */
+
+    const project =
+        projects[projectId];
+
+
+    if (!project) {
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       필요한 HTML 요소 가져오기
+    ====================================================== */
+
+    const modal =
+        document.getElementById(
+            "projectModal"
+        );
+
+
+    const modalBox =
+        document.querySelector(
+            ".modal"
+        );
+
+
+    const modalImage =
+        document.getElementById(
+            "modalImage"
+        );
+
+
+    const modalProjectName =
+        document.getElementById(
+            "modalProjectName"
+        );
+
+
+    const modalDescription =
+        document.getElementById(
+            "modalDescription"
+        );
+
+
+    const modalLinks =
+        document.getElementById(
+            "modalLinks"
+        );
+
+
+    const modalLinks2 =
+        document.getElementById(
+            "modalLinks2"
+        );
+
+
+
+    /* =====================================================
+       프로젝트 이미지 적용
+    ====================================================== */
+
+    modalImage.src =
+        project.image;
+
+
+
+    /* =====================================================
+       프로젝트 종류에 따라 이미지 비율 변경
+
+       팀 프로젝트     → 4 : 3
+       개인 포트폴리오 → 6 : 5
+    ====================================================== */
+
+    if (
+        projectId.startsWith(
+                "personal"
+        )
+        ) {
+
+    /* 개인 포트폴리오 이미지 비율 */
+    modalImage.classList.add(
+        "personal-ratio"
+    );
+
+
+    /* 개인 포트폴리오에서는
+    두 번째 파란 박스 숨기기 */
+    modalLinks2.style.display =
+        "none";
+
+
+    /* 개인 포트폴리오용 레이아웃 적용 */
+    modalBox.classList.add(
+        "personal-modal"
+    );
+
+    } else {
+
+    /* 팀 프로젝트 이미지 비율 */
+    modalImage.classList.remove(
+        "personal-ratio"
+    );
+
+
+    /* 팀 프로젝트에서는
+       두 번째 파란 박스 다시 표시 */
+    modalLinks2.style.display =
+        "";
+
+
+    /* 개인 포트폴리오용 레이아웃 제거 */
+    modalBox.classList.remove(
+        "personal-modal"
+    );
+
+}
+
+
+
+    /* =====================================================
+       프로젝트 제목 적용
+    ====================================================== */
+
+    modalProjectName.textContent =
+        project.title;
+
+
+
+    /* =====================================================
+       프로젝트 설명 적용
+    ====================================================== */
+
+    modalDescription.innerHTML =
+        project.description;
+
+
+
+    /* =====================================================
+       이전 프로젝트 내용 제거
+
+       새로운 프로젝트를 열었을 때
+       이전 내용이 남지 않도록 초기화
+    ====================================================== */
+
+    modalLinks.innerHTML =
+        "";
+
+
+    modalLinks2.innerHTML =
+        "";
+
+
+
+    /* =====================================================
+       첫 번째 파란 박스 내용 생성
+    ====================================================== */
+
+    if (project.links) {
+
+        project.links.forEach(function(item) {
+
+
+            /* 항목 전체 박스 */
+
+            const itemBox =
+                document.createElement(
+                    "div"
+                );
+
+            itemBox.className =
+                "portfolio-link";
+
+
+
+            /* 제목 */
+
+            const itemTitle =
+                document.createElement(
+                    "h3"
+                );
+
+            itemTitle.textContent =
+                item.title;
+
+            itemBox.appendChild(
+                itemTitle
+            );
+
+
+
+            /* 일반 텍스트 */
+
+            if (item.text) {
+
+                const textElement =
+                    document.createElement(
+                        "p"
+                    );
+
+                textElement.textContent =
+                    item.text;
+
+                itemBox.appendChild(
+                    textElement
+                );
+
+            }
+
+
+
+            /* 링크 */
+
+            if (item.url) {
+
+                const linkElement =
+                    document.createElement(
+                        "a"
+                    );
+
+                linkElement.href =
+                    item.url;
+
+                linkElement.target =
+                    "_blank";
+
+                linkElement.rel =
+                    "noopener noreferrer";
+
+                linkElement.textContent =
+                    item.linkText || item.url;
+
+                itemBox.appendChild(
+                    linkElement
+                );
+
+            }
+
+
+
+            /* 첫 번째 파란 박스에 추가 */
+
+            modalLinks.appendChild(
+                itemBox
+            );
+
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       두 번째 파란 박스 내용 생성
+    ====================================================== */
+
+    if (project.links2) {
+
+        project.links2.forEach(function(item) {
+
+
+            /* 항목 전체 박스 */
+
+            const itemBox =
+                document.createElement(
+                    "div"
+                );
+
+            itemBox.className =
+                "portfolio-link";
+
+
+
+            /* 제목 */
+
+            const itemTitle =
+                document.createElement(
+                    "h3"
+                );
+
+            itemTitle.textContent =
+                item.title;
+
+            itemBox.appendChild(
+                itemTitle
+            );
+
+            /* =====================================================
+            중간 제목
+            두 번째 파란 박스에서만 사용
+            ===================================================== */
+
+            if (item.subtitle) {
+
+                const subtitleElement =
+                    document.createElement(
+                        "h4"
+                    );
+
+                subtitleElement.textContent =
+                    item.subtitle;
+
+                subtitleElement.className =
+                    "portfolio-subtitle";
+
+                itemBox.appendChild(
+                    subtitleElement
+                );
+
+}
+
+
+
+
+            /* 일반 텍스트 */
+
+            if (item.text) {
+
+                const textElement =
+                    document.createElement(
+                        "p"
+                    );
+
+                textElement.textContent =
+                    item.text;
+
+                itemBox.appendChild(
+                    textElement
+                );
+
+            }
+
+
+
+            /* 링크 */
+
+            if (item.url) {
+
+                const linkElement =
+                    document.createElement(
+                        "a"
+                    );
+
+                linkElement.href =
+                    item.url;
+
+                linkElement.target =
+                    "_blank";
+
+                linkElement.rel =
+                    "noopener noreferrer";
+
+                linkElement.textContent =
+                    item.linkText || item.url;
+
+                itemBox.appendChild(
+                    linkElement
+                );
+
+            }
+
+
+
+            /* 두 번째 파란 박스에 추가 */
+
+            modalLinks2.appendChild(
+                itemBox
+            );
+
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       모달 열기
+    ====================================================== */
+
+    modal.classList.add(
+        "active"
+    );
+
+
+
+    /* =====================================================
+       모달이 열린 동안
+       뒤쪽 홈페이지 스크롤 방지
+    ====================================================== */
+
+    document.body.style.overflow =
+        "hidden";
+
+
+
+    /* =====================================================
+       스크롤 초기화
+
+       다른 프로젝트를 열었을 때
+       이전 스크롤 위치가 남지 않도록 함
+    ====================================================== */
+
+    modalBox.scrollTop =
+        0;
+
+
+    modalLinks.scrollTop =
+        0;
+
+
+    modalLinks2.scrollTop =
+        0;
+
+
+
+    /* =====================================================
+       화면이 그려진 후 한 번 더 초기화
+    ====================================================== */
+
+    requestAnimationFrame(
+
+        function() {
+
+
+            modalBox.scrollTop =
+                0;
+
+
+            modalLinks.scrollTop =
+                0;
+
+
+            modalLinks2.scrollTop =
+                0;
+
+
+
+            requestAnimationFrame(
+
+                function() {
+
+
+                    modalBox.scrollTop =
+                        0;
+
+
+                    modalLinks.scrollTop =
+                        0;
+
+
+                    modalLinks2.scrollTop =
+                        0;
+
+
+                }
+
+            );
+
+
+        }
+
+    );
+
+
+}
+
+
+    /* =========================================================
+       프로젝트 상세창 닫기
+    ========================================================== */
+
+    function closeModal() {
+
+
+        const modal =
+            document.getElementById(
+                "projectModal"
+            );
+
+
+        const modalBox =
+            document.querySelector(
+                ".modal"
+            );
+
+
+        const modalLinks =
+            document.getElementById(
+                "modalLinks"
+            );
+
+        const modalLinks2 =
+            document.getElementById(
+                "modalLinks2"
+            );
+
+
+
+        /* =====================================================
+           ★ 닫을 때도 스크롤 위치 초기화
+        ====================================================== */
+
+        modalBox.scrollTop =
+            0;
+
+
+        modalLinks.scrollTop =
+            0;
+
+        modalLinks2.scrollTop =
+            0;
+
+
+
+        /* =====================================================
+           모달 닫기
+        ====================================================== */
+
+        modal.classList.remove(
+            "active"
+        );
+
+
+
+        /* =====================================================
+           뒤쪽 사이트 스크롤 다시 허용
+        ====================================================== */
+
+        document.body.style.overflow =
+            "";
+
+
+    }
+
+
+
+    /* =========================================================
+       반투명한 검은 배경을 클릭하면
+       상세창 닫기
+    ========================================================== */
+
+    function backgroundClose(event) {
+
+
+        if (
+            event.target.id ===
+            "projectModal"
+        ) {
+
+
+            closeModal();
+
+
+        }
+
+
+    }
+
+
+
+    /* =========================================================
+       ESC 키를 누르면
+       상세창 닫기
+    ========================================================== */
+
+    document.addEventListener(
+
+        "keydown",
+
+        function(event) {
+
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+
+                closeModal();
+
+
+            }
+
+
+        }
+
+    );
+
+
+
+    /* =========================================================
+       팀 프로젝트
+
+       마우스로 잡고 좌우 스크롤
+    ========================================================== */
+
+    const teamProjectList =
+        document.querySelector(
+            ".team-project-list"
+        );
+
+
+    let isDragging =
+        false;
+
+
+    let dragStartX =
+        0;
+
+
+    let dragStartScrollLeft =
+        0;
+
+
+    let hasDragged =
+        false;
+
+
+
+    /* =========================================================
+       마우스 버튼 누름
+    ========================================================== */
+
+    teamProjectList.addEventListener(
+
+        "mousedown",
+
+        function(event) {
+
+
+            /* 왼쪽 마우스 버튼만 */
+
+            if (
+                event.button !== 0
+            ) {
+
+
+                return;
+
+
+            }
+
+
+            isDragging =
+                true;
+
+
+            hasDragged =
+                false;
+
+
+            teamProjectList.classList.add(
+                "dragging"
+            );
+
+
+            dragStartX =
+                event.pageX;
+
+
+            dragStartScrollLeft =
+                teamProjectList.scrollLeft;
+
+
+        }
+
+    );
+
+
+
+    /* =========================================================
+       마우스를 움직일 때
+    ========================================================== */
+
+    teamProjectList.addEventListener(
+
+        "mousemove",
+
+        function(event) {
+
+
+            if (!isDragging) {
+
+                return;
+
+            }
+
+
+            const moveX =
+
+                event.pageX -
+                dragStartX;
+
+
+
+            /* =================================================
+               5px 이상 움직였으면
+
+               단순 클릭이 아니라
+               드래그라고 판단
+            ================================================== */
+
+            if (
+                Math.abs(moveX) > 5
+            ) {
+
+
+                hasDragged =
+                    true;
+
+
+            }
+
+
+
+            /* =================================================
+               가로 스크롤 이동
+            ================================================== */
+
+            teamProjectList.scrollLeft =
+
+                dragStartScrollLeft -
+                moveX;
+
+
+        }
+
+    );
+
+
+
+    /* =========================================================
+       마우스 버튼 놓음
+    ========================================================== */
+
+    teamProjectList.addEventListener(
+
+        "mouseup",
+
+        function() {
+
+
+            isDragging =
+                false;
+
+
+            teamProjectList.classList.remove(
+                "dragging"
+            );
+
+
+        }
+
+    );
+
+
+
+    /* =========================================================
+       마우스가 영역 밖으로 나감
+    ========================================================== */
+
+    teamProjectList.addEventListener(
+
+        "mouseleave",
+
+        function() {
+
+
+            isDragging =
+                false;
+
+
+            teamProjectList.classList.remove(
+                "dragging"
+            );
+
+
+        }
+
+    );
+
+
+
+    /* =========================================================
+       ★ 클릭과 드래그 구분
+
+
+       그냥 클릭
+       → 프로젝트 상세창 열기
+
+
+       마우스를 잡고 움직임
+       → 가로 스크롤만 이동
+
+
+       드래그한 뒤 프로젝트가
+       실수로 열리는 현상 방지
+    ========================================================== */
+
+    teamProjectList.addEventListener(
+
+        "click",
+
+        function(event) {
+
+
+            if (
+                hasDragged
+            ) {
+
+
+                event.preventDefault();
+
+
+                event.stopPropagation();
+
+
+                hasDragged =
+                    false;
+
+
+            }
+
+
+        },
+
+        true
+
+    );
+
+    /* =========================================================
+        개인 포트폴리오 최신순 자동 정렬
+
+        HTML에는
+        personal1 → personal2 → personal3 → ...
+        순서대로 작성해도
+
+        실제 화면에서는
+        최신 프로젝트가 가장 먼저 표시됨
+        ========================================================= */
+
+        const personalProjectList =
+            document.querySelector(
+                ".personal-project-list"
+            );
+
+
+        if (personalProjectList) {
+
+            const personalCards =
+                Array.from(
+                    personalProjectList.children
+                );
+
+
+            personalCards
+                .reverse()
+                .forEach(function(card) {
+
+                personalProjectList.appendChild(
+                    card
+                );
+
+        });
+
+}
+
+
+        /* =========================================
+        스크롤 Fade Up
+        ========================================= */
+
+        const revealElements = document.querySelectorAll(
+            ".scroll-reveal"
+        );
+
+        if ("IntersectionObserver" in window) {
+
+            const revealObserver = new IntersectionObserver(
+                function(entries, observer) {
+
+                    entries.forEach(function(entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "is-visible"
+                            );
+
+                            observer.unobserve(entry.target);
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.08,
+                    rootMargin: "0px 0px 40px 0px"
+                }
+            );
+
+            revealElements.forEach(function(element) {
+                revealObserver.observe(element);
+            });
+
+        } else {
+
+            revealElements.forEach(function(element) {
+                element.classList.add("is-visible");
+            });
+
+}
+
+
+        /* =========================================
+        팀 프로젝트 좌우 버튼 스크롤
+        ========================================= */
+
+        function scrollTeam(direction) {
+
+            const list = document.querySelector(
+                ".team-project-list"
+            );
+
+            if (!list) return;
+
+            const card = list.querySelector(".project-card");
+
+            const gap = parseFloat(
+                getComputedStyle(list).gap
+            ) || 0;
+
+            const distance = card
+                ? card.getBoundingClientRect().width + gap
+                : 350;
+
+            list.scrollBy({
+                left: direction * distance,
+                behavior: "smooth"
+            });
+
+        }
+
+
+</script>
+
+
+</body>
+
+</html>
